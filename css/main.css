@@ -3,11 +3,15 @@
 	--background-dark: #161718;
 	--link-dark: #F8A231;
 	--body-color-dark: #E6E7E8;
+	--ruler-start-dark: #FF751E;
+	--ruler-end-dark: #F74EF4;
 
 	/* Light */
 	--background-light: #E6E7E8;
 	--link-light: #074BCE;
 	--body-color-light: #161718;
+	--ruler-start-light: #1D81FF;
+	--ruler-end-light: var(--ruler-end-dark);
 	
 }
 
@@ -65,7 +69,7 @@ nav a svg.arrow {
 
 nav a {
 	color: var(--link-dark);
-	font-size: 1.3125rem;
+	font-size: 1.25rem;
 	font-weight: 650;
 	text-decoration: none;
 	line-height: 0;
@@ -94,6 +98,7 @@ footer {
 	margin-top: 6em;
 }
 
+
 .nah {
 	position: relative;
 	margin: 0 0.125rem;
@@ -103,35 +108,52 @@ footer {
 	content: "";
 	display: block;
 	position: absolute;
-    left: -5%;
+    left: -6%;
     width: 110%;
-    height: 3px;
-	background: rgba(254, 11, 11, 0.74);
+    height: 4px;
+	background: rgba(255, 8, 8, 0.84);
 	transform: rotate(-1.7deg);
     /* position of strike through */
-	top: 49%;
+	top: 48%;
 }
 
 
 /* Dividers */
 
-.vertical-ruler {
-	width: 100%;
-	height: 8px;
-	background: linear-gradient(to right, #FF751E, #F74EF4);
+.relative {
+	position: relative;
 }
 
+.vertical-ruler {
+	width: 100%;
+	height: 10px;
+	border-radius: 1px;
+	/* border-top: 1px solid rgba(255,255,255,0.1); */
+	background: linear-gradient(to right, var(--ruler-start-dark), var(	--ruler-end-dark));
+	box-shadow: 0 5px 2px -4px rgba(0,0,0,0.7), 0 1px 1px -1px rgba(255,255,255,0.8) inset;
+}
+
+.vertical-ruler.blur {
+	position: absolute;
+	top: 2px;
+	-webkit-filter: blur(12px) brightness(1.5);
+	opacity: 0.1;
+	box-shadow: none;
+	z-index: -1;
+}
 
 /* Media Queries */
 
 @media (min-width: 1366px) {
 	html {
-		font-size: 110%;
+		font-size: 115%;
 	}
 	main {
 		max-width: 944px;
 	}
-
+	.vertical-ruler {
+		height: 9px;
+	}
 }
 
 @media (min-width: 1024px) {
@@ -144,9 +166,6 @@ footer {
 	nav ul li:not(:last-child) {
 		margin-right: 2rem;
 	}
-	nav ul li {
-		margin-top: 0;
-	}
 }
 
 @media (max-width: 767px) {
@@ -155,7 +174,7 @@ footer {
 		margin-top: 4rem;
 	}
 	.vertical-ruler {
-		height: 6px;
+		height: 7px;
 	}
 }
 
@@ -192,16 +211,14 @@ footer {
 	0% {
 		opacity: 0;
 		transform: scale(0.975);
-		transform: translateY(100);
 	}
 	100% {
 		opacity:1;
 		transform: scale(1);
-		transform: translateY(0);
 	}
 }
 
 .page-appear{
-	animation: appear-fade-scale 1.2s cubic-bezier(0.445, 0.05, 0.55, 1);
+	animation: appear-fade-scale 1.7s cubic-bezier(0.445, 0.05, 0.55, 1);
 	/* animation: appear-fade-scale 1.2s cubic-bezier(.16,.20,.56,1); */
 }
