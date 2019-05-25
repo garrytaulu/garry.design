@@ -1,17 +1,18 @@
 :root {
 	/* Dark */
 	--background-dark: #161718;
-	--link-dark: #F8A231;
+	--link-dark: #FE9E03;
 	--body-color-dark: #E6E7E8;
-	--ruler-start-dark: #FF751E;
-	--ruler-end-dark: #F74EF4;
+	--ruler-start-dark: #FE5E11;
+	--ruler-end-dark: #FE3AFB;
 
 	/* Light */
 	--background-light: #E6E7E8;
-	--link-light: #074BCE;
+	--link-light: #0651E2;
 	--body-color-light: #161718;
-	--ruler-start-light: #1D81FF;
+	--ruler-start-light: #0079F5;
 	--ruler-end-light: var(--ruler-end-dark);
+	--ruler-shadow-light: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 1px -1px rgba(255,255,255,0.8) inset;
 	
 }
 
@@ -111,7 +112,7 @@ footer {
     left: -6%;
     width: 110%;
     height: 4px;
-	background: rgba(255, 8, 8, 0.84);
+	background: rgba(255, 7, 7, 0.88);
 	transform: rotate(-1.7deg);
     /* position of strike through */
 	top: 48%;
@@ -136,9 +137,8 @@ footer {
 .vertical-ruler.blur {
 	position: absolute;
 	top: 2px;
-	-webkit-filter: blur(12px) brightness(1.5);
 	filter: blur(12px) brightness(1.5);
-	opacity: 0.1;
+	opacity: 0.15;
 	box-shadow: none;
 	z-index: -1;
 }
@@ -201,7 +201,8 @@ footer {
 	}
 
 	.vertical-ruler {
-		background: linear-gradient(to right, #1D81FF, #F74EF4)
+		background: linear-gradient(to right, var(--ruler-start-light), var(--ruler-end-light));
+		box-shadow: var(--ruler-shadow-light);
 	}
   }
 
