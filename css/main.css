@@ -41,6 +41,7 @@ body {
 	background: var(--background);
 	color: var(--body-color);
 	transition: var(--theme-transition);
+	visibility: hidden;
 }
 
 main {
@@ -378,6 +379,7 @@ html[data-theme='light'] .settings-menu {
 
 
 .page-appear {
+	visibility: visible;
 	animation: appear-fade-scale 1.7s var(--curve);
 	/* animation: appear-fade-scale 1.2s cubic-bezier(.16,.20,.56,1); */
 }
