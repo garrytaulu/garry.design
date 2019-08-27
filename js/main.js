@@ -20,67 +20,58 @@ if (currentTheme) {
 	} else {
 		lightThemeRadio.checked = true;
 	}
-} 
-
-function switchTheme(e) {
-	console.log(autoThemeRadio.checked);
-	if (autoThemeRadio.checked == true) {
-		if ((hourNow >= 20 && hourNow <= 24) || (hourNow <= 6 && hourNow >= 0)) {
-			document.documentElement.setAttribute('data-theme', 'dark');
-			localStorage.setItem('theme', 'dark');
-		} else {
-			document.documentElement.setAttribute('data-theme', 'light');
-			localStorage.setItem('theme', 'light');
-		}
-		localStorage.setItem('themeSetting', 'auto');
-	}
-    if (lightThemeRadio.checked === true) {
-		document.documentElement.setAttribute('data-theme', 'light');
-		localStorage.setItem('theme', 'light');
-		localStorage.setItem('themeSetting', 'light')
-    }
-    else if (darkThemeRadio.checked == true) {
-		document.documentElement.setAttribute('data-theme', 'dark');
-		localStorage.setItem('theme', 'dark');
-		localStorage.setItem('themeSetting', 'dark')
-	}    
-	console.log(currentTheme);
-	switchThemeTransition();
+} else {
+	document.documentElement.setAttribute('data-theme', 'dark');
+	darkThemeRadio.checked = true;
 }
 
-themeSettings.addEventListener('change', switchTheme, false);
-
-function setColorScheme() {
+function switchTheme() {
 	const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
 	const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
 	const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
 	const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified;
-  
-	window.matchMedia("(prefers-color-scheme: dark)").addListener(e => e.matches && activateDarkMode())
-	window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && activateLightMode())
-  
-	if(isDarkMode) activateDarkMode()
-	if(isLightMode) activateLightMode()
-	if(isNotSpecified || hasNoSupport) {
-	  console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
-	  now = new Date();
-	  hour = now.getHours();
-	  if (hour < 4 || hour >= 16) {
+
+	console.log(autoThemeRadio.checked);
+	if (autoThemeRadio.checked == true) {
+		if (hasNoSupport) {
+			if ((hourNow >= 20 && hourNow <= 24) || (hourNow <= 6 && hourNow >= 0)) {
+				document.documentElement.setAttribute('data-theme', 'dark');
+				localStorage.setItem('theme', 'dark');
+			} else {
+				document.documentElement.setAttribute('data-theme', 'light');
+				localStorage.setItem('theme', 'light');
+			}
+		}
+		if (isDarkMode) {
+			activateDarkMode();
+		} 
+		if (isLightMode) {
+			activateLightMode();
+		}
+		localStorage.setItem('themeSetting', 'auto');
+	}
+    if (lightThemeRadio.checked === true) {
+		activateLightMode();
+    }
+    else if (darkThemeRadio.checked == true) {
 		activateDarkMode();
-	  }
-	}
-
-
+	}    
+	console.log(currentTheme);
 }
 
-window.matchMedia("(prefers-color-scheme: dark)").addListener(test);
-
-function test(e) {
-	if (e.matches) {
-		console.log("dark mode on");
-	}
+function activateLightMode() {
+	document.documentElement.setAttribute('data-theme', 'light');
+	localStorage.setItem('theme', 'light');
+	localStorage.setItem('themeSetting', 'light');
 }
 
+function activateDarkMode() {
+	document.documentElement.setAttribute('data-theme', 'dark');
+	localStorage.setItem('theme', 'dark');
+	localStorage.setItem('themeSetting', 'dark');
+}
+
+themeSettings.addEventListener('change', switchTheme, false);
 
 function handleMenu() {
 	if (settingsMenu.classList.contains('menu-appear')) {
@@ -99,6 +90,7 @@ function handleMenu() {
 }
 
 
+// Prevent menu closing when changing theme
 document.addEventListener("click", function(e) {
 	console.log(e.target);
 	if (e.target.matches('.settings-button')) {
@@ -115,28 +107,5 @@ document.addEventListener("click", function(e) {
 	}
 });
 
-/**
- * Sets a color scheme for the website.
- * If browser supports "prefers-color-scheme" it will respect the setting for light or dark mode
- * otherwise it will set a dark theme during night time
- */
-function setColorScheme() {
-  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
-  const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
-  const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
-  const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified;
-
-  window.matchMedia("(prefers-color-scheme: dark)").addListener(e => e.matches && activateDarkMode())
-  window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && activateLightMode())
-
-  if(isDarkMode) activateDarkMode()
-  if(isLightMode) activateLightMode()
-  if(isNotSpecified || hasNoSupport) {
-	console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
-	now = new Date();
-	hour = now.getHours();
-	if (hour < 4 || hour >= 16) {
-			activateDarkMode();
-		}
-	}
-}
+window.matchMedia("(prefers-color-scheme: dark)").addListener(e => e.matches && switchTheme())
+window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && switchTheme())
