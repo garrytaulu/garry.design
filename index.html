@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="utf-8">
@@ -22,10 +22,11 @@
     window.addEventListener("load", function() {
       b = document.body;
       b.className += "page-appear";
-    });
 
-    document.addEventListener("animationend", function() {
-      b.classList.remove("page-appear");
+      // b.addEventListener("animationend", function() {
+      //   b.classList.remove("page-appear");
+      // });
+
     });
   </script>
 </head>
@@ -35,6 +36,25 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
   <main>
+    <button class="settings-button">
+      
+    </button>
+    <div id="menu" class="settings-menu ds">
+      <form id="theme-settings">
+        <div class="theme-setting">  
+          <input id="lt" type="radio" name="theme" value="light">
+          <label for="lt">Light</label>
+        </div>
+        <div class="theme-setting">  
+          <input id="dt" type="radio" name="theme" value="dark">
+          <label for="dt">Dark</label>
+        </div>
+        <div class="theme-setting">  
+          <input id="at" type="radio" name="theme" value="auto">
+          <label for="at">Auto</label>
+        </div>
+      </form>
+    </div>
     <div class="relative">
       <div class="vertical-ruler"></div>
       <div class="vertical-ruler blur"></div>
@@ -76,7 +96,7 @@
     </footer> -->
   </main>
   
-  <!--<script src="js/main.js"></script>-->
+  <script src="js/main.js"></script>
 </body>
 
 </html>

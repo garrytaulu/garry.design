@@ -1,32 +1,52 @@
 :root {
-	/* Dark */
-	--background-dark: #161718;
-	--link-dark: #FE9E03;
-	--body-color-dark: #E6E7E8;
-	--ruler-start-dark: #FE5E11;
-	--ruler-end-dark: #FE3AFB;
+	--curve: cubic-bezier(0.445, 0.05, 0.55, 1);
+	--dark-base: rgb(22, 23, 24);
+	--light-base: rgb(230, 231, 232);
+	--theme-transition: background-color 0.5s var(--curve), color 0.8s var(--curve);
+}
 
-	/* Light */
-	--background-light: #E6E7E8;
-	--link-light: #0651E2;
-	--body-color-light: #161718;
-	--ruler-start-light: #0079F5;
-	--ruler-end-light: var(--ruler-end-dark);
-	--ruler-shadow-light: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 1px -1px rgba(255,255,255,0.8) inset;
-	
+[data-theme="dark"] {
+	--background: var(--dark-base);
+	--border: rgba(151, 151, 151, 0.1);
+	--link: #FE9E03;
+	--body-color: #E6E7E8;
+	--ruler-start: #FE5E11;
+	--ruler-end: #FE3AFB;
+	--ruler-shadow: 0 5px 2px -4px rgba(0,0,0,0.7), 0 1px 1px -1px rgba(255,255,255,0.8) inset;
+}
+
+[data-theme="light"] {
+	--background: var(--light-base);
+	--border: rgba(151, 151, 151, 0.1);
+	--link: #0651E2;
+	--body-color: #1a1b1c;
+	--ruler-start: #0079F5;
+	--ruler-end: #FE3AFB;
+	--ruler-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 1px -1px rgba(255,255,255,0.8) inset;
+}
+
+.ds {
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 
+
 html {
-	background: var(--background-dark);
-	color: var(--body-color-dark);
 	font-size: 1em;
 	line-height: 1.4;
+}
+
+body {
+	background: var(--background);
+	color: var(--body-color);
+	transition: var(--theme-transition);
 }
 
 main {
 	max-width: 720px;
 	margin: 6em auto 6em auto;
+	position: relative;
 }
 
 .uppercase {
@@ -38,7 +58,8 @@ ul {
 }
 
 a {
-	color: var(--body-color-dark); 
+	color: var(--body-color); 
+	transition: var(--theme-transition);
 }
 
 nav {
@@ -56,6 +77,7 @@ nav ul li {
 	line-height: 1;
 }
 
+
 @media (min-width: 320px) and (max-width: 1023px) {
 	nav ul li:not(:first-child) {
 		margin-top: 2em;
@@ -69,11 +91,12 @@ nav a svg.arrow {
 }
 
 nav a {
-	color: var(--link-dark);
+	color: var(--link);
 	font-size: 1.25rem;
 	font-weight: 650;
 	text-decoration: none;
 	line-height: 0;
+
 }
 
 h1 {
@@ -119,6 +142,127 @@ footer {
 }
 
 
+/* Settings Menu */
+
+.settings-button {
+	position: absolute;
+	top: -48px;
+	right: 0;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	border: 0;
+	transition: transform 0.1s ease-in-out, background 0.8s var(--curve);
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html[data-theme='dark'] .settings-button {
+	background: url('../assets/settings-dark.svg') no-repeat top left;
+}
+
+html[data-theme='light'] .settings-button {
+	background: url('../assets/settings-light.svg') no-repeat top left;
+}
+
+.settings-button:active, .settings-button:focus {
+	transform: scale(0.86);
+}
+
+.settings-menu {
+	position: absolute;
+	width: 86px;
+	text-align: center;
+	-webkit-backdrop-filter: blur(20px) brightness(1.4);  
+	backdrop-filter: blur(20px) brightness(1.4);  
+	padding: 12px;
+	z-index: 10000;
+	border-radius: 4px;
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	right: 0;
+	top: -8px;
+	transition: background-color 0.8s var(--curve), box-shadow 0.8s var(--curve);
+	display: none;
+}
+
+/* Because backdrop-filter doesn't work with variables */
+html[data-theme='dark'] .settings-menu {
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
+	background-color: rgba(46, 48, 51, 0.4);
+	box-shadow: 0 8px 14px -3px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(151, 151, 151, 0.08);
+}
+
+html[data-theme='light'] .settings-menu {
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
+	background-color: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 12px 16px -4px rgba(0, 0, 0, 0.20), inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+/* Add some margin but not for the last one */
+.settings-menu .theme-setting:not(:last-child) {
+	margin-bottom: 16px;
+}
+
+/* Reset the appearance of radios */
+.settings-menu input[type=radio] {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	position: absolute;
+	visibility: hidden;
+}
+
+.settings-menu .theme-setting label {
+	font-size: 0.9375rem;
+	font-weight: 450;
+
+}
+
+/* Create our custom radio element */
+.settings-menu .theme-setting label::before {
+	display: block;
+	width: 40px;
+	height: 40px;
+	background:#ffffff;
+	border-radius: 50%;
+	content: "";
+	box-shadow: 0 0 0 transparent;
+	margin: 0 auto 4px auto;
+	transition: box-shadow 0.25s ease-in-out;
+}
+
+/* Add the SVGs for the icons */
+.settings-menu .theme-setting label[for=lt]::before {
+	content: url('../assets/light-setting.svg');
+	background: var(--light-base);
+}
+
+.settings-menu .theme-setting label[for=dt]::before {
+	content: url('../assets/dark-setting.svg');
+	background: var(--dark-base);
+}
+
+.settings-menu .theme-setting label[for=at]::before {
+	content: url('../assets/auto-setting.svg');
+	background: linear-gradient(to right , var(--light-base) 0%, var(--light-base) 50%, var(--dark-base) 50%, var(--dark-base)  100%)
+}
+
+/* Set label color when checked */
+.settings-menu .theme-setting input[type=radio]:checked ~ label {
+	color: var(--link);
+}
+
+/* Set border on radio when checked */ 
+.settings-menu .theme-setting input[type=radio]:checked ~ label::before {
+	box-shadow: 0 0 0 3px var(--link);
+	border: transparent;
+}
+
+
+
+  
+  
 /* Dividers */
 
 .relative {
@@ -129,9 +273,9 @@ footer {
 	width: 100%;
 	height: 10px;
 	border-radius: 1px;
-	/* border-top: 1px solid rgba(255,255,255,0.1); */
-	background: linear-gradient(to right, var(--ruler-start-dark), var(	--ruler-end-dark));
-	box-shadow: 0 5px 2px -4px rgba(0,0,0,0.7), 0 1px 1px -1px rgba(255,255,255,0.8) inset;
+	background: linear-gradient(to right, var(--ruler-start), var(	--ruler-end));
+	box-shadow: var(--ruler-shadow);
+	transition: box-shadow 0.5s ease-in-out
 }
 
 .vertical-ruler.blur {
@@ -172,7 +316,7 @@ footer {
 @media (max-width: 767px) {
 	main {
 		max-width: calc(100vw - 96px);
-		margin-top: 4rem;
+		margin-top: 6rem;
 	}
 	.vertical-ruler {
 		height: 7px;
@@ -185,31 +329,9 @@ footer {
 	}
 }
 
-
-@media (prefers-color-scheme: light) {
-	html {	  
-		background: var(--background-light);
-		color: var(--body-color-light);
-	}
-
-	a {
-		color: var(--body-color-light);
-	}
-
-	nav a {
-		color: var(--link-light);
-	}
-
-	.vertical-ruler {
-		background: linear-gradient(to right, var(--ruler-start-light), var(--ruler-end-light));
-		box-shadow: var(--ruler-shadow-light);
-	}
-  }
-
-
   /* Animations */
 
-  @keyframes appear-fade-scale {
+@keyframes appear-fade-scale {
 	0% {
 		opacity: 0;
 		transform: scale(0.975);
@@ -220,7 +342,54 @@ footer {
 	}
 }
 
-.page-appear{
-	animation: appear-fade-scale 1.7s cubic-bezier(0.445, 0.05, 0.55, 1);
+@keyframes scale-from-zero {
+	0% {
+		transform: scale(0.4);
+		opacity: 0;
+	}
+	15% {
+		opacity: 0.6;
+	}
+	60% {
+		transform: scale(1.05);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes scale-from-zero-reverse {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	15% {
+		opacity: 0.6;
+	}
+	60% {
+		opacity: 0;
+	}
+	100% {
+		transform: scale(0.6);
+		opacity: 0;
+	}
+}
+
+
+.page-appear {
+	animation: appear-fade-scale 1.7s var(--curve);
 	/* animation: appear-fade-scale 1.2s cubic-bezier(.16,.20,.56,1); */
+}
+
+.menu-appear {
+	transform-origin: top right;
+	display: block;
+	animation: scale-from-zero 0.3s var(--curve);
+}
+
+.menu-disappear {
+	transform-origin: top right;
+	display: block;
+	animation: scale-from-zero-reverse 0.2s ease-out;
 }
