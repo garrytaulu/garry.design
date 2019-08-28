@@ -2,11 +2,11 @@ var date = new Date();
 // var date = new Date('April 27, 2019 06:00:00');
 var hourNow = date.getHours();
 
-var themeSettings = document.getElementById('theme-settings');
-var settingsMenu = document.getElementById('menu')
-var lightThemeRadio = document.getElementById('lt');
-var darkThemeRadio = document.getElementById('dt');
-var autoThemeRadio = document.getElementById('at');
+const themeSettings = document.getElementById('theme-settings');
+const settingsMenu = document.getElementById('menu')
+const lightThemeRadio = document.getElementById('lt');
+const darkThemeRadio = document.getElementById('dt');
+const autoThemeRadio = document.getElementById('at');
 
 var currentTheme = localStorage.getItem('theme');
 var currentThemeSetting = localStorage.getItem('themeSetting');
@@ -31,7 +31,6 @@ function switchTheme() {
 	const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
 	const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified;
 
-	console.log(autoThemeRadio.checked);
 	if (autoThemeRadio.checked == true) {
 		if (hasNoSupport) {
 			if ((hourNow >= 20 && hourNow <= 24) || (hourNow <= 6 && hourNow >= 0)) {
@@ -56,7 +55,6 @@ function switchTheme() {
     else if (darkThemeRadio.checked == true) {
 		activateDarkMode();
 	}    
-	console.log(currentTheme);
 }
 
 function activateLightMode() {
@@ -75,24 +73,21 @@ themeSettings.addEventListener('change', switchTheme, false);
 
 function handleMenu() {
 	if (settingsMenu.classList.contains('menu-appear')) {
-		console.log("closing menu");
 		settingsMenu.classList.remove('menu-appear');
 		settingsMenu.classList.add('menu-disappear');
 
 	} else {
-		console.log("opening menu");
 		settingsMenu.classList.remove('menu-disappear');
 		settingsMenu.classList.add('menu-appear');
 	};
 	settingsMenu.addEventListener("animationend", function() {
-	settingsMenu.classList.remove("menu-disappear");
+		settingsMenu.classList.remove("menu-disappear");
     });
 }
 
 
 // Prevent menu closing when changing theme
 document.addEventListener("click", function(e) {
-	console.log(e.target);
 	if (e.target.matches('.settings-button')) {
 		handleMenu();
 		return;

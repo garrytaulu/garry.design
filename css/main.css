@@ -30,7 +30,9 @@
 	-webkit-user-select: none;
 }
 
-
+.preload {
+	display: none;
+}
 
 html {
 	font-size: 1em;
@@ -261,7 +263,17 @@ html[data-theme='light'] .settings-menu {
 }
 
 
+.menu-appear {
+	transform-origin: top right;
+	display: block;
+	animation: scale-from-zero 0.3s var(--curve);
+}
 
+.menu-disappear {
+	transform-origin: top right;
+	display: block;
+	animation: scale-from-zero-reverse 0.2s ease-out;
+}
   
   
 /* Dividers */
@@ -348,8 +360,8 @@ html[data-theme='light'] .settings-menu {
 		transform: scale(0.4);
 		opacity: 0;
 	}
-	15% {
-		opacity: 0.6;
+	10% {
+		opacity: 0.7;
 	}
 	60% {
 		transform: scale(1.05);
@@ -365,7 +377,7 @@ html[data-theme='light'] .settings-menu {
 		opacity: 1;
 		transform: scale(1);
 	}
-	15% {
+	10% {
 		opacity: 0.6;
 	}
 	60% {
@@ -378,20 +390,9 @@ html[data-theme='light'] .settings-menu {
 }
 
 
-.page-appear {
+.come-in {
 	visibility: visible;
 	animation: appear-fade-scale 1.7s var(--curve);
 	/* animation: appear-fade-scale 1.2s cubic-bezier(.16,.20,.56,1); */
 }
 
-.menu-appear {
-	transform-origin: top right;
-	display: block;
-	animation: scale-from-zero 0.3s var(--curve);
-}
-
-.menu-disappear {
-	transform-origin: top right;
-	display: block;
-	animation: scale-from-zero-reverse 0.2s ease-out;
-}
