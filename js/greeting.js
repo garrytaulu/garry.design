@@ -1,5 +1,5 @@
-// var date = new Date('April 27, 2019 03:59:00');
 var date = new Date();
+var date = new Date('September 2, 2019 09:59:00');
 var day = date.getDay();
 var hourNow = date.getHours();
 var minutes = date.getMinutes();
@@ -13,11 +13,11 @@ if ((day >= 1 && day <= 5) && (hourMins >= 7 && hourMins < 9)) {
 }
 // Monday - Friday, 9am - 5:30pm
 else if ((day >= 1 && day <= 5) && (hourMins >= 9 && hourMins < 17.5)) {
-  greeting = "I’m probably at work. 💻 ";
+  greeting = "I’m usually at work. 💻 ";
 }
 // Monday - Friday, 5:30pm - 6:30pm
 else if ((day >= 1 && day <= 5) && (hourMins >= 17.5 && hourMins < 18.5)) {
-  greeting = "I’m probably at work heading home from work. 🚆";
+  greeting = "I’m probably heading home from work. 🚆";
 }
 // Friday - Saturday, 8pm - 2am
 else if (((day == 5 || day == 6) && (hourMins >= 19 && hourMins < 24)) || ((day == 6 || day == 0) && (hourMins >= 0 && hourMins < 3))) {
