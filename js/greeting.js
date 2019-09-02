@@ -1,5 +1,5 @@
 var date = new Date();
-var date = new Date('September 2, 2019 09:59:00');
+// var date = new Date('September 2, 2019 09:59:00');
 var day = date.getDay();
 var hourNow = date.getHours();
 var minutes = date.getMinutes();
@@ -38,7 +38,7 @@ else if ((day == 6) && (hourMins >= 13 && hourMins < 19)) {
   greeting = 'I could be out-and-about, otherwise — <a href="https://twitter.com/garrytaulu/">Twitter</a>.';
 }
 else {
-  greeting = 'I\'m most likely reading, designing, coding or watching something. Otherwise — <a href="https://twitter.com/garrytaulu/">Twitter</a>.';
+  greeting = 'I\'d probably be reading, designing, coding or tv\'ing. But <em>truthfully</em> I\'m probably scrolling through <a href="https://twitter.com/garrytaulu/">Twitter</a>.';
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
