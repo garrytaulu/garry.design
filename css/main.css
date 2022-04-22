@@ -386,7 +386,7 @@ html[data-theme='light'] .settings-menu {
 	20% {
 		opacity: 1;
 	}
-	60% {
+	50% {
 		transform: scale(1.05);
 	}
 	100% {
