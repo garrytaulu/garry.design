@@ -19,7 +19,6 @@
 
   <link rel="stylesheet" href="css/main.css">
 
-  <script src="js/greeting.js"></script>
   <script type="text/javascript">
     window.addEventListener("load", function() {
       b = document.body;
@@ -70,24 +69,13 @@
     </header>
     
       <h3>I create considered experiences.</h3>
-      
-      <script>
-          function decodeEmail(e) {
-              // Now you can access the event object (e) directly
-              this.href=; return true
-          }
-          
-          document.addEventListener('alpine:init', () => {
-              Alpine.data('email', () => ({
-                  email: '',
-                  handleEmail() {
-                      this.email = atob('bWFpbHRvOmhlbGxvJTQwZ2FycnkuZGVzaWdu')
-                  },
-              }))
-          })
-      </script>
 
-      <nav>
+      <nav x-data="{ email: '/'}">
+        <script>
+            function handleEmail() {
+                this.email = atob('bWFpbHRvOmhlbGxvJTQwZ2FycnkuZGVzaWdu')
+            }
+        </script>
         <ul>
           <li>
             <a href="https://twitter.com/garrytaulu/" target="_blank">twitter</a>
@@ -108,7 +96,7 @@
             <a href="https://linkedin.com/in/garrytaulu/" target="_blank">linkedin</a>
           </li>
           <li>
-            <a x-data="email" x-bind:href="email" @click="handleEmail">contact</a>
+            <a x-bind:href="email" @click="handleEmail">contact</a>
           </li>
         </ul>
       </nav>

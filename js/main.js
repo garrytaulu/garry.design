@@ -1,5 +1,4 @@
 const themeSettings = document.getElementById('theme-settings');
-const settingsMenu = document.getElementById('menu')
 const lightThemeRadio = document.getElementById('lt');
 const darkThemeRadio = document.getElementById('dt');
 const autoThemeRadio = document.getElementById('at');
