@@ -366,6 +366,7 @@ html[data-theme='light'] .settings-menu {
 	animation-name: menu-appear;
 	animation-timing-function: var(--curve);
 	animation-duration: .3s;
+	animation-fill-mode: both;
 }
 
 .menu-disappear {
@@ -373,7 +374,7 @@ html[data-theme='light'] .settings-menu {
 	animation-name: menu-disappear;
 	animation-timing-function: var(--curve);
 	animation-duration: .3s;
-
+	animation-fill-mode: both;
 }
 
 

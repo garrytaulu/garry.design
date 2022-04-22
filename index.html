@@ -70,6 +70,22 @@
     </header>
     
       <h3>I create considered experiences.</h3>
+      
+      <script>
+          function decodeEmail(e) {
+              // Now you can access the event object (e) directly
+              this.href=; return true
+          }
+          
+          document.addEventListener('alpine:init', () => {
+              Alpine.data('email', () => ({
+                  email: '',
+                  handleEmail() {
+                      this.email = atob('bWFpbHRvOmhlbGxvJTQwZ2FycnkuZGVzaWdu')
+                  },
+              }))
+          })
+      </script>
 
       <nav>
         <ul>
@@ -92,13 +108,13 @@
             <a href="https://linkedin.com/in/garrytaulu/" target="_blank">linkedin</a>
           </li>
           <li>
-            <a href="mailto:hello@garry.design">contact</a>
+            <a x-data="email" x-bind:href="email" @click="handleEmail">contact</a>
           </li>
         </ul>
       </nav>
     <div class="footer">
-        <span>Handcrafted with <span class="heart">&#9825;</span>   </span>
-    </div class="footer">
+        <span>Handcrafted with <span class="heart">&#9825;</span>
+    </div>
   </main>
   
   <!-- Gross preload of SVGs -->
