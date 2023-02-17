@@ -66,7 +66,7 @@ a {
 }
 
 nav {
-	margin-top: 4rem;
+	margin-top: 2rem;
 }
 
 nav ul {
@@ -331,7 +331,7 @@ html[data-theme='light'] .settings-menu {
 		flex-direction: row;
 	}
 	nav ul li {
-		margin-top: 0;
+		margin-top: 1.5rem;
 	}
 	nav ul li:not(:last-child) {
 		margin-right: 2rem;
