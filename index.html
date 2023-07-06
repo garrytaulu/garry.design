@@ -17,7 +17,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css">
   <link rel="stylesheet" href="css/main.css">
 
-  <script src="js/greeting.js"></script>
   <script type="text/javascript">
     window.addEventListener("load", function() {
       b = document.body;
@@ -28,6 +27,12 @@
       // });
 
     });
+    function handleEmail(e) {
+      console.log(e)
+        this.email = atob('bWFpbHRvOmhlbGxvQGdhcnJ5LmRlc2lnbg==')
+        var element = document.getElementById('email');
+        element.href = email;
+    }
   </script>
 </head>
 
@@ -69,6 +74,12 @@
             <a href="https://vert.works" target="_blank">vert</a>
           </li>
           <li>
+            <a href="https://www.threads.net/@garrytaulu" target="_blank">threads</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/garrytaulu/" target="_blank">twitter</a>
+          </li>
+          <li>
             <a href="https://twitter.com/garrytaulu/" target="_blank">twitter</a>
           </li>
           <li>
@@ -93,7 +104,7 @@
             <a href="https://linkedin.com/in/garrytaulu/" target="_blank">linkedin</a>
           </li>
           <li>
-            <a href="mailto:garry.taulu@gmail.com">contact</a>
+            <a id="email" href="email-me" onclick="handleEmail()" oncontextmenu="handleEmail()" title="Press to open your mail client or copy this link">email</a>
           </li>
         </ul>
       </nav>
